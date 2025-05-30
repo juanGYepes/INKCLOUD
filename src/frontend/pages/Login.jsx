@@ -5,19 +5,22 @@ import datos from "../../assets/data.json";
 import { getDashboardRoutes } from '../../components/auth/common/getDashboardRoutes';
 import { useAuth } from '../../context/AuthContext';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
+  console.log(datos.user);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (dataForm) => {
     console.log("datos ingresados:", dataForm);
 
     // Verificar usuario con email y password
-    const userVerify = datos.user.find(
-      (u) => u.email === dataForm.email && u.password === dataForm.password
-    );
+    const userVerify = datos.user.find((u)=>{
+          return u.email == dataForm.email && u.password == dataForm.password;
+    });
+    console.log("usuario: ", userVerify);
 
     if (userVerify) {
       login(userVerify); // guarda usuario en contexto o localStorage
@@ -33,7 +36,7 @@ export default function Login() {
         <div className="logo fw-bold fs-3">INKCLOUD</div>
 
         <div className="d-flex align-items-center gap-3">
-          <button className="btn btn-link text-dark">👤</button>
+          <Link className="btn btn-link text-dark" to="/Register">Registrate</Link>
         </div>
       </div>
 

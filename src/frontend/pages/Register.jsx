@@ -5,8 +5,8 @@ import Footer from "../components/Footer";
 export default function Register() {
   return (
     <>
-      <div className="navbar navbar-expand navbar-light bg-warning topbar mb-4 static-top shadow container d-flex align-items-center justify-content-between">
-        <h4 className="m-0 font-weight-bold text-dark">Registro de Usuario</h4>
+      <div className="navbar navbar-expand navbar-light bg-warning topbar mb-4 static-top shadow container d-flex align-items-center justify-content-center">
+        <h4 className="m-0 font-weight-bold text-dark"> Registro de Usuario</h4>
       </div>
 
       <div className="container">
