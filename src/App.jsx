@@ -1,20 +1,17 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PublicHome from './frontend/pages/PublicHome';
 import Dashboard from './admin/pages/Dashboard';
 import Login from './frontend/pages/Login';
-import { useState } from 'react';
+import Register from './frontend/pages/Register';
 
 function App() {
-  let [isAuthenticated, setIsAuthenticated]= useState(true);
-  let handleLogin = () => {
-    setIsAuthenticated(true);//Token de autorizacion
-  }
   return (
     <Router>
       <Routes>
-        <Route path="/PublicHome" element={ isAuthenticated ? <Navigate to="/Dashboard"/> : <PublicHome />} />
-        <Route path="/Login" element={ isAuthenticated ? <Navigate to="/Dashboard"/> : <Login />} />
-        <Route path="/Dashboard" element={ isAuthenticated ? <Dashboard /> : <Navigate to="/Login"/>} />
+        <Route path="/PublicHome" element={<PublicHome />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Dashboard" element={<Dashboard />} />
+        <Route path="/Register" element={<Register />} />
         <Route path="*" element={<PublicHome />} />
       </Routes>
     </Router>
@@ -22,3 +19,4 @@ function App() {
 }
 
 export default App;
+

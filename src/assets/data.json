@@ -1,0 +1,74 @@
+{
+  "user": [
+    {
+      "id": 1,
+      "username": "Carlos Rodríguez",
+      "email": "carlos.rodriguez@gmail.com",
+      "password": "carlos123",
+      "rol": "admin"
+    },
+    {
+      "id": 2,
+      "username": "María Fernández",
+      "email": "maria.fernandez@gmail.com",
+      "password": "maria123",
+      "rol": "customer"
+    },
+    {
+      "id": 3,
+      "username": "Juan Pérez",
+      "email": "juan.perez@gmail.com",
+      "password": "juan123",
+      "rol": "seller"
+    },
+    {
+      "id": 4,
+      "username": "Ana Gómez",
+      "email": "ana.gomez@gmail.com",
+      "password": "ana123",
+      "rol": "customer"
+    },
+    {
+      "id": 5,
+      "username": "Luis Martínez",
+      "email": "luis.martinez@gmail.com",
+      "password": "luis123",
+      "rol": "seller"
+    },
+    {
+      "id": 6,
+      "username": "Elena Sánchez",
+      "email": "elena.sanchez@gmail.com",
+      "password": "elena123",
+      "rol": "admin"
+    },
+    {
+      "id": 7,
+      "username": "Pedro Ramírez",
+      "email": "pedro.ramirez@gmail.com",
+      "password": "pedro123",
+      "rol": "customer"
+    },
+    {
+      "id": 8,
+      "username": "Lucía Torres",
+      "email": "lucia.torres@gmail.com",
+      "password": "lucia123",
+      "rol": "seller"
+    },
+    {
+      "id": 9,
+      "username": "Javier Morales",
+      "email": "javier.morales@gmail.com",
+      "password": "javier123",
+      "rol": "admin"
+    },
+    {
+      "id": 10,
+      "username": "Isabel Herrera",
+      "email": "isabel.herrera@gmail.com",
+      "password": "isabel123",
+      "rol": "customer"
+    }
+  ]
+}
