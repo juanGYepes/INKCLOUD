@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Header() {
   return (
@@ -15,7 +16,7 @@ export default function Header() {
         </form>
 
         <div className="d-flex align-items-center gap-3">
-          <button className="btn btn-link text-dark">👤</button>
+          <Link className="btn btn-link text-dark" to="/Login">👤</Link>
           <button className="btn btn-link text-dark position-relative">
             🛒
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">0</span>
