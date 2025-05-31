@@ -1,30 +1,28 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
+const LOCAL_STORAGE_KEY = "user"; // Clave única para localStorage
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true); // Inicia en true mientras carga
 
-    useEffect(()=>{
-        //Verificar si hay un usuario en localStorage
-        let storedUser = localStorage.getItem('userData');
-        if(storedUser){
-            setUser(JSON.parse(storedUser));
-        }
-        setLoading(false);
-    },[]);
-
-
+  useEffect(() => {
+    const storedUser = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoading(false);
+  }, []);
 
   const login = (userData) => {
     setUser(userData);
-    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(userData));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("user");
+    localStorage.removeItem(LOCAL_STORAGE_KEY);
   };
 
   return (
@@ -37,3 +35,4 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   return useContext(AuthContext);
 }
+
