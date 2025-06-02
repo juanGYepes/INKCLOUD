@@ -11,7 +11,6 @@ import PublicRoutes from "./components/auth/PublicRoutes";
 import PrivateRoutes from "./components/auth/PrivateRoutes";
 import RoleRoutes from "./components/auth/RoleRoutes";
 import { AuthProvider } from "./context/AuthContext"; // ✅ Importa el Provider correctamente
-
 function App() {
   return (
     <>
