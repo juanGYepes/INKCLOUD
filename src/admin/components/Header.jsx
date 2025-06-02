@@ -1,9 +1,15 @@
-import { use } from "react"
 import { useAuth } from "../../context/AuthContext"
+import { useState } from "react";
+import "../../assets/css/estilos.css";
+
 
 export default function Header() {
     let {user, logout} = useAuth();
-    console.log("Info user", user);
+    let [profileMenu, setProfileMenu] = useState(false);
+    let [alertMenu, setAlertMenu] = useState(false);
+    let [messageMenu, setMessageMenu] = useState(false);
+
+
   return (
     <>
        <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -56,14 +62,16 @@ export default function Header() {
 
                         {/*<!-- Nav Item - Alerts -->*/}
                         <li className="nav-item dropdown no-arrow mx-1">
-                            <a className="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                            <button onClick={()=>setAlertMenu(!alertMenu)}
+                                 className="nav-link dropdown-toggle" type="button" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i className="fas fa-bell fa-fw"></i>
                                 {/*<!-- Counter - Alerts -->*/}
                                 <span className="badge badge-danger badge-counter">3+</span>
-                            </a>
+                            </button>
                             {/*<!-- Dropdown - Alerts -->*/}
-                            <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            {
+                                alertMenu && <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 className="dropdown-header">
                                     Alerts Center
@@ -103,18 +111,22 @@ export default function Header() {
                                 </a>
                                 <a className="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
                             </div>
+
+                            }
                         </li>
 
                         {/*<!-- Nav Item - Messages -->*/}
                         <li className="nav-item dropdown no-arrow mx-1">
-                            <a className="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                            <button onClick={()=>setMessageMenu(!messageMenu)}
+                                className="nav-link dropdown-toggle" type="button" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i className="fas fa-envelope fa-fw"></i>
                                 {/*<!-- Counter - Messages -->*/}
                                 <span className="badge badge-danger badge-counter">7</span>
-                            </a>
+                            </button>
                             {/*<!-- Dropdown - Messages -->*/}
-                            <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            {
+                                messageMenu && <div className="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 className="dropdown-header">
                                     Message Center
@@ -169,20 +181,24 @@ export default function Header() {
                                 </a>
                                 <a className="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
+
+                            }
                         </li>
 
                         <div className="topbar-divider d-none d-sm-block"></div>
 
                         {/*<!-- Nav Item - User Information -->*/}
                         <li className="nav-item dropdown no-arrow">
-                            <a className="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                            <button onClick={()=>setProfileMenu(!profileMenu)}
+                                className="nav-link dropdown-toggle" type="button" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user.username}</span>
                                 <img className="img-profile rounded-circle"
                                     src={"https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2020/01/krusty-payaso.jpg?tf=3840x"}/>
-                            </a>
+                            </button>
                             {/*<!-- Dropdown - User Information -->*/}
-                            <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                            {
+                                profileMenu && <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
                                 <a className="dropdown-item" href="#">
                                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -197,11 +213,14 @@ export default function Header() {
                                     Activity Log
                                 </a>
                                 <div className="dropdown-divider"></div>
-                                <a className="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <button onClick= {()=>logout()}
+                                     className="dropdown-item" type="button">
                                     <i className="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
+                                </button>
                             </div>
+
+                            }
                         </li>
 
                     </ul>
