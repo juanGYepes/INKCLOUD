@@ -1,15 +1,19 @@
-import Aside from '../components/Aside';
-import Content from '../components/Content';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext"; 
+import { getDashboardRoutes } from "../../components/auth/common/getDashboardRoutes";
+
 function Dashboard() {
-  return (
-    <div id="page-top">
-      {/* <!-- Page Wrapper --> */}
-      <div id="wrapper">
-        <Aside/>
-        <Content/>
-      </div>
-    </div>
-  );
+let {user} = useAuth();
+let navigate = useNavigate();
+
+useEffect(() => {
+   if (user) {
+      navigate(getDashboardRoutes(user.rol));
+    } 
+  },[user, navigate]);
+
+  return null; // No se muestra nada solo redirige
 }
 
 export default Dashboard;

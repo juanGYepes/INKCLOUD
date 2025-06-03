@@ -40,7 +40,7 @@ export  const linksNavigate ={
         },
           {
            "label":"permissions",
-           "icon":"fa-solid fa-table-cells-row-unlock",
+           "icon":"fa-solid fa-shield-halved",
            "children":[
                 {"path":"/dashboard/permissions","label":"Ver permisos"},
                 {"path":"/dashboard/permissions/crear" , "label":"crear permisos"}
