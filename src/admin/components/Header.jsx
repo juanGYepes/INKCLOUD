@@ -1,6 +1,8 @@
 import { useAuth } from "../../context/AuthContext"
 import { useState } from "react";
 import "../../assets/css/estilos.css";
+import { useNavigate } from "react-router-dom";
+
 
 
 export default function Header() {
@@ -8,6 +10,9 @@ export default function Header() {
     let [profileMenu, setProfileMenu] = useState(false);
     let [alertMenu, setAlertMenu] = useState(false);
     let [messageMenu, setMessageMenu] = useState(false);
+
+    const navigate = useNavigate();
+
 
 
   return (
@@ -205,10 +210,11 @@ export default function Header() {
                             {
                                 profileMenu && <div className="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a className="dropdown-item" href="#">
+                                <button onClick={() => navigate("dashboard/profile")} className="dropdown-item" type="button">
                                     <i className="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
-                                </a>
+                                </button>
+
                                 <a className="dropdown-item" href="#">
                                     <i className="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings

@@ -11,6 +11,7 @@ import PublicRoutes from "./components/auth/PublicRoutes";
 import PrivateRoutes from "./components/auth/PrivateRoutes";
 import RoleRoutes from "./components/auth/RoleRoutes";
 import DashboardLayout from "./admin/pages/DashboardLayout";
+import Profile from "./admin/components/Profile"
 
 import List from "./admin/components/List";
 import ListPublic from "./admin/components/ListPublic";
@@ -65,6 +66,7 @@ function App() {
                 
 
                 <Route path="customer" element={<CustomerPage />} />
+                <Route path="dashboard/profile" element={<Profile />} />
                   
                 </Route>
               </Route>
