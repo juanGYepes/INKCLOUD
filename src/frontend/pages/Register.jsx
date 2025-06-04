@@ -16,9 +16,28 @@ export default function Register() {
               <div className="card-body">
                 <form>
                   <div className="mb-3">
+                    <label className="form-label">Ingrese su identificacion</label>
+                    <input type="number" className="form-control" placeholder="Ingrese su Id" />
+                  </div>
+                  <div className="mb-3">
                     <label className="form-label">Nombre completo</label>
                     <input type="text" className="form-control" placeholder="Tu nombre completo" />
                   </div>
+                  <div className="mb-3">
+                    <label className="form-label">Direccion </label>
+                    <input type="text" className="form-control" placeholder="Tu direccion" />
+                  </div> 
+                  <div className="mb-3">
+                    <label className="form-label">Celular </label>
+                    <input type="text" className="form-control" placeholder="Tu # celular" />
+                  </div> 
+                  <div className="form-outline mb-4">
+                    <label className="form-label" htmlFor="rol">Rol</label>
+                    <select id="rol" className="form-select form-control">
+                      <option value="">Seleccionar un rol</option>
+                      <option value="cliente">Cliente</option>
+                    </select>
+                  </div>                                                 
                   <div className="mb-3">
                     <label className="form-label">Correo electrónico</label>
                     <input type="email" className="form-control" placeholder="ejemplo@email.com" />
