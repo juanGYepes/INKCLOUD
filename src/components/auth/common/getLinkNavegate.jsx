@@ -25,7 +25,7 @@ export  const linksNavigate ={
            "icon":"fa-solid fa-user",
            "children":[
                 {"path":"/dashboard/users","label":"Ver usuarios"},
-                {"path":"/dashboard/users/crear" , "label":"crear usurios"}
+                {"path":"/dashboard/users/crear" , "label":"crear usuarios"}
             ]
            
         },  
