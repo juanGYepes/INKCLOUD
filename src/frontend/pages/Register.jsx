@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { crearUsuario } from "../../api/apiUsuario";
+import React, { useState } from "react";
 import FooterTop from "../components/FooterTop";
 import Footer from "../components/Footer";
 
@@ -32,36 +31,24 @@ export default function Register() {
       return;
     }
 
-    // Preparar datos que se enviarán (excluyendo confirmarContrasena)
-    const usuario = {
-      idusuario: formData.idUsuario,
-      nomusuario: formData.nomUsuario,
-      dirusuario: formData.dirUsuario,
-      celular: formData.celular,
-      email: formData.correo,
-      contrasena: formData.contrasena,
-      rol: formData.rol,
-      activo: formData.activo
-    };
-
     try {
-      await crearUsuario(usuario);
-      alert("Usuario registrado exitosamente");
-
-      // Limpiar el formulario
-      setFormData({
-        idUsuario: "",
-        nomUsuario: "",
-        dirUsuario: "",
-        celular: "",
-        correo: "",
-        contrasena: "",
-        confirmarContrasena: "",
-        rol: "",
-        activo: "si"
+      const response = await fetch("http://localhost:8080/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
       });
+
+      if (response.ok) {
+        alert("Usuario registrado exitosamente");
+        // Limpiar el formulario o redirigir al usuario
+      } else {
+        const errorData = await response.json();
+        alert(`Error al registrar usuario: ${errorData.message}`);
+      }
     } catch (error) {
-      console.error("Error al registrar usuario:", error);
+      console.error("Error al enviar los datos:", error);
       alert("Ocurrió un error al registrar el usuario");
     }
   };
