@@ -124,7 +124,7 @@ export default function Register() {
                       required
                     >
                       <option value="">Seleccionar un rol</option>
-                      <option value="cliente">Cliente</option>
+                      <option value="customer">customer</option>
                     </select>
                   </div>
                   <div className="mb-3">

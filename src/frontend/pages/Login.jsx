@@ -1,12 +1,10 @@
 import Footer from '../components/Footer';
 import FooterTop from '../components/FooterTop';
 import { useNavigate } from 'react-router-dom';
-import datos from "../../assets/data.json";
 import { getDashboardRoutes } from '../../components/auth/common/getDashboardRoutes';
 import { useAuth } from '../../context/AuthContext';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { loginUsuario } from '../../api/apiUsuario';
 
 export default function Login() {
   const { login } = useAuth();
@@ -15,18 +13,28 @@ export default function Login() {
 
   const onSubmit = async (dataForm) => {
     try {
-      const response = await loginUsuario(dataForm.email, dataForm.password);
-      const user = response.data;
+      const response = await fetch('http://localhost:8080/usuarios/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idUsuario: dataForm.idUsuario,
+          contrasena: dataForm.contrasena,
+        }),
+      });
 
-      if (user && user.rol) {
-        login(user); // Guarda en contexto
+      const user = await response.json();
+
+      if (response.ok && user && user.rol) {
+        login(user);
         navigate(getDashboardRoutes(user.rol));
       } else {
-        alert("Respuesta inválida del servidor");
+        alert("Credenciales incorrectas o usuario no encontrado");
       }
     } catch (error) {
-      console.error("Error de autenticación:", error);
-      alert("Credenciales incorrectas o usuario no encontrado");
+      console.error("Error al iniciar sesión:", error);
+      alert("Ocurrió un error al intentar iniciar sesión");
     }
   };
 
@@ -45,12 +53,12 @@ export default function Login() {
           <div className="col-md-4">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="mb-3">
-                <label className="form-label">Correo electrónico</label>
+                <label className="form-label">ID de Usuario</label>
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
-                  {...register("email")}
-                  required
+                  {...register("idUsuario", { required: true })}
+                  placeholder="Ej: 1037073495"
                 />
               </div>
               <div className="mb-3">
@@ -58,8 +66,8 @@ export default function Login() {
                 <input
                   type="password"
                   className="form-control"
-                  {...register("password")}
-                  required
+                  {...register("contrasena", { required: true })}
+                  placeholder="Tu contraseña"
                 />
               </div>
               <button type="submit" className="btn btn-warning w-100">
