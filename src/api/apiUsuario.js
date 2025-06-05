@@ -21,3 +21,11 @@ export const modificarUsuario = (idusuario, usuarioActualizado) =>
 // Eliminar un usuario por ID
 export const eliminarUsuario = (idusuario) =>
   axios.delete(`${api}/${idusuario}`);
+
+// Login de usuario (validar correo y contraseña)
+export const loginUsuario = (correo, contrasena) => {
+  return axios.post(`${api}/login`, {
+    correo,
+    contrasena,
+  });
+};
