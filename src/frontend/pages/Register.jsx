@@ -1,12 +1,75 @@
-import React from "react";
+import { useState } from "react";
+import { crearUsuario } from "../../api/apiUsuario";
 import FooterTop from "../components/FooterTop";
 import Footer from "../components/Footer";
 
 export default function Register() {
+  const [formData, setFormData] = useState({
+    idUsuario: "",
+    nomUsuario: "",
+    dirUsuario: "",
+    celular: "",
+    correo: "",
+    contrasena: "",
+    confirmarContrasena: "",
+    rol: "",
+    activo: "si"
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validar que las contraseñas coincidan
+    if (formData.contrasena !== formData.confirmarContrasena) {
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    // Preparar datos que se enviarán (excluyendo confirmarContrasena)
+    const usuario = {
+      idusuario: formData.idUsuario,
+      nomusuario: formData.nomUsuario,
+      dirusuario: formData.dirUsuario,
+      celular: formData.celular,
+      email: formData.correo,
+      contrasena: formData.contrasena,
+      rol: formData.rol,
+      activo: formData.activo
+    };
+
+    try {
+      await crearUsuario(usuario);
+      alert("Usuario registrado exitosamente");
+
+      // Limpiar el formulario
+      setFormData({
+        idUsuario: "",
+        nomUsuario: "",
+        dirUsuario: "",
+        celular: "",
+        correo: "",
+        contrasena: "",
+        confirmarContrasena: "",
+        rol: "",
+        activo: "si"
+      });
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      alert("Ocurrió un error al registrar el usuario");
+    }
+  };
+
   return (
     <>
       <div className="navbar navbar-expand navbar-light bg-warning topbar mb-4 static-top shadow container d-flex align-items-center justify-content-center">
-        <h4 className="m-0 font-weight-bold text-dark"> Registro de Usuario</h4>
+        <h4 className="m-0 font-weight-bold text-dark">Registro de Usuario</h4>
       </div>
 
       <div className="container">
@@ -14,41 +77,104 @@ export default function Register() {
           <div className="col-md-6">
             <div className="card shadow mb-4">
               <div className="card-body">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="mb-3">
-                    <label className="form-label">Ingrese su identificacion</label>
-                    <input type="number" className="form-control" placeholder="Ingrese su Id" />
+                    <label className="form-label">Ingrese su identificación</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="idUsuario"
+                      value={formData.idUsuario}
+                      onChange={handleChange}
+                      placeholder="Ingrese su ID"
+                      required
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Nombre completo</label>
-                    <input type="text" className="form-control" placeholder="Tu nombre completo" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="nomUsuario"
+                      value={formData.nomUsuario}
+                      onChange={handleChange}
+                      placeholder="Tu nombre completo"
+                      required
+                    />
                   </div>
                   <div className="mb-3">
-                    <label className="form-label">Direccion </label>
-                    <input type="text" className="form-control" placeholder="Tu direccion" />
-                  </div> 
+                    <label className="form-label">Dirección</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="dirUsuario"
+                      value={formData.dirUsuario}
+                      onChange={handleChange}
+                      placeholder="Tu dirección"
+                      required
+                    />
+                  </div>
                   <div className="mb-3">
-                    <label className="form-label">Celular </label>
-                    <input type="text" className="form-control" placeholder="Tu # celular" />
-                  </div> 
+                    <label className="form-label">Celular</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="celular"
+                      value={formData.celular}
+                      onChange={handleChange}
+                      placeholder="Tu número celular"
+                      required
+                    />
+                  </div>
                   <div className="form-outline mb-4">
                     <label className="form-label" htmlFor="rol">Rol</label>
-                    <select id="rol" className="form-select form-control">
+                    <select
+                      id="rol"
+                      name="rol"
+                      className="form-select form-control"
+                      value={formData.rol}
+                      onChange={handleChange}
+                      required
+                    >
                       <option value="">Seleccionar un rol</option>
                       <option value="cliente">Cliente</option>
                     </select>
-                  </div>                                                 
+                  </div>
                   <div className="mb-3">
                     <label className="form-label">Correo electrónico</label>
-                    <input type="email" className="form-control" placeholder="ejemplo@email.com" />
+                    <input
+                      type="email"
+                      className="form-control"
+                      name="correo"
+                      value={formData.correo}
+                      onChange={handleChange}
+                      placeholder="ejemplo@email.com"
+                      required
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Contraseña</label>
-                    <input type="password" className="form-control" placeholder="Contraseña" />
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="contrasena"
+                      value={formData.contrasena}
+                      onChange={handleChange}
+                      placeholder="Contraseña"
+                      required
+                    />
                   </div>
                   <div className="mb-3">
                     <label className="form-label">Confirmar contraseña</label>
-                    <input type="password" className="form-control" placeholder="Repite la contraseña" />
+                    <input
+                      type="password"
+                      className="form-control"
+                      name="confirmarContrasena"
+                      value={formData.confirmarContrasena}
+                      onChange={handleChange}
+                      placeholder="Repite la contraseña"
+                      required
+                    />
                   </div>
                   <button type="submit" className="btn btn-warning w-100">
                     Registrarse
@@ -60,8 +186,8 @@ export default function Register() {
         </div>
       </div>
 
-      <FooterTop/>
-      <Footer/>
+      <FooterTop />
+      <Footer />
     </>
   );
 }
