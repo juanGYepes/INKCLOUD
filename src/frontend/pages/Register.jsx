@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FooterTop from "../components/FooterTop";
 import Footer from "../components/Footer";
 
 export default function Register() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     idUsuario: "",
     nomUsuario: "",
@@ -25,11 +28,13 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validar que las contraseñas coincidan
     if (formData.contrasena !== formData.confirmarContrasena) {
       alert("Las contraseñas no coinciden");
       return;
     }
+
+    // Preparar datos eliminando confirmarContrasena
+    const { confirmarContrasena, ...dataToSend } = formData;
 
     try {
       const response = await fetch("http://localhost:8080/usuarios", {
@@ -37,15 +42,30 @@ export default function Register() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSend)
       });
 
       if (response.ok) {
         alert("Usuario registrado exitosamente");
-        // Limpiar el formulario o redirigir al usuario
+
+        // Limpiar formulario
+        setFormData({
+          idUsuario: "",
+          nomUsuario: "",
+          dirUsuario: "",
+          celular: "",
+          correo: "",
+          contrasena: "",
+          confirmarContrasena: "",
+          rol: "",
+          activo: "si"
+        });
+
+        // Redirigir al login
+        navigate("/login");
       } else {
-        const errorData = await response.json();
-        alert(`Error al registrar usuario: ${errorData.message}`);
+        const errorText = await response.text();
+        alert(`Error al registrar usuario: ${errorText}`);
       }
     } catch (error) {
       console.error("Error al enviar los datos:", error);

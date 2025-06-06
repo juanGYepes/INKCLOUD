@@ -37,7 +37,21 @@ export default function FormUser() {
 
       if (response.ok) {
         alert("Usuario creado correctamente");
-        
+
+        // Limpiar formulario
+        setFormData({
+          idUsuario: "",
+          nomUsuario: "",
+          dirUsuario: "",
+          celular: "",
+          correo: "",
+          contrasena: "",
+          confirmarContrasena: "",
+          rol: "",
+          activo: "si"
+        }); 
+        // Redirigir a la lista de usuarios
+        window.location.href = "/dashboard/users";
       } else {
         const errorData = await response.json();
         alert(`Error al crear usuario: ${errorData.message}`);
