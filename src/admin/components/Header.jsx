@@ -198,7 +198,7 @@ export default function Header() {
                                 className="nav-link dropdown-toggle" type="button" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <div className="d-flex flex-column text-end">
-                                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user.username}</span>
+                                         <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user.nomUsuario}</span>
                                          <span className="mr-2 d-none d-lg-inline text-gray-600 small">{user.rol}</span>
 
                                     </div>
